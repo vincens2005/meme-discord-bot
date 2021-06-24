@@ -4,6 +4,7 @@ import random
 import markovify
 from PIL import Image, ImageDraw, ImageFont
 import textwrap
+import re
 
 
 filename = "kansas.txt"
@@ -27,14 +28,16 @@ def make_meme():
 
     draw = ImageDraw.Draw(reaction_image)
     image_width, image_height = reaction_image.size
-    font = ImageFont.truetype(font="./impact.ttf", size=int(image_height/8))
+    font = ImageFont.truetype(font="./impact.ttf", size=int(image_height/10))
 
-    # top_text = top_text.upper()
-    # bottom_text = bottom_text.upper()
+    top_text = top_text.upper()
+    bottom_text = bottom_text.upper()
+    top_text = re.sub(r'[^\w\s]', '', top_text)
+    bottom_text = re.sub(r'[^\w\s]', '', bottom_text)
 
     char_width, char_height = font.getsize("A")
-    chars_per_line = round(image_width / char_width)
-    
+    chars_per_line = round(image_width / char_width) + 3
+
     top_lines = textwrap.wrap(top_text, width=chars_per_line)
     bottom_lines = textwrap.wrap(bottom_text, width=chars_per_line)
 
@@ -42,16 +45,17 @@ def make_meme():
     for line in top_lines:
         line_width, line_height = font.getsize(line)
         x = (image_width - line_width)/2
-        draw.text((x, y), line, fill='white', font=font)
+        draw.text((x, y), line, fill="white", font=font, stroke_width=3, stroke_fill="black")
         y += line_height
-        
+
     y = image_height - char_height * len(bottom_lines) - 15
     for line in bottom_lines:
         line_width, line_height = font.getsize(line)
         x = (image_width - line_width)/2
-        draw.text((x, y), line, fill='white', font=font)
+        draw.text((x, y), line, fill="white", font=font, stroke_width=3, stroke_fill="black")
         y += line_height
-        
+
     reaction_image.save("meme.jpg")
+
 
 make_meme()
