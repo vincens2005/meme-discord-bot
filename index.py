@@ -5,7 +5,10 @@ import markovify
 from PIL import Image, ImageDraw, ImageFont
 import textwrap
 import re
+import discord
+from dotenv import dotenv_values
 
+env = dotenv_values(".env")
 
 filename = "kansas.txt"
 
@@ -54,8 +57,36 @@ def make_meme():
         x = (image_width - line_width)/2
         draw.text((x, y), line, fill="white", font=font, stroke_width=3, stroke_fill="black")
         y += line_height
+   
+    print(reaction_image)
+    return reaction_image
 
-    reaction_image.save("meme.jpg")
 
+def convert_image(image):
+    image_filename = "tmp_" + str(random.randint(0, 100000)) + ".jpg"
+    image.save(image_filename)
+    image_file = open("./" + image_filename, "rb")
+    return {
+      "filename": image_filename,
+      "file": image_file
+    }
 
-make_meme()
+client = discord.Client()
+
+@client.event
+async def on_ready():
+    print("logged in!")
+
+@client.event
+async def on_message(message):
+    # if message.user == client.user:
+    #     return
+
+    if message.content.lower().startswith("!meme"):
+        meme = make_meme()
+        meme = convert_image(meme)
+
+        file = discord.File(meme["file"], filename=meme["filename"])
+        await message.channel.send(file=file)
+
+client.run(env["TOKEN"])
