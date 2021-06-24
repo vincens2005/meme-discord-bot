@@ -57,7 +57,7 @@ def make_meme():
         x = (image_width - line_width)/2
         draw.text((x, y), line, fill="white", font=font, stroke_width=3, stroke_fill="black")
         y += line_height
-   
+
     print(reaction_image)
     return reaction_image
 
@@ -71,11 +71,14 @@ def convert_image(image):
       "file": image_file
     }
 
+
 client = discord.Client()
+
 
 @client.event
 async def on_ready():
     print("logged in!")
+
 
 @client.event
 async def on_message(message):
@@ -88,5 +91,6 @@ async def on_message(message):
 
         file = discord.File(meme["file"], filename=meme["filename"])
         await message.channel.send(file=file)
+        os.remove("./" + meme["filename"])
 
 client.run(env["TOKEN"])
