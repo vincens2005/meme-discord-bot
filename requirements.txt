@@ -1,0 +1,4 @@
+markovify
+pillow
+discord
+python-dotenv

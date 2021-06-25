@@ -1,17 +1,12 @@
 #!/bin/python3
 import urllib.request
 import subprocess
-dependencies = [
-  "markovify",
-  "pillow",
-  "discord",
-  "python-dotenv"
-]
+
 
 print("installing dependencies. running as root reccomended")
-for dependency in dependencies:
-    print("installing", dependency + "...")
-    subprocess.run(["pip", "install", dependency])
+
+
+subprocess.run(["pip", "install", "-r", "requirements.txt"])
 
 print("dependencies installed")
 
