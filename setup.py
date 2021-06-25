@@ -41,7 +41,7 @@ print("checking if token env var exists...")
 try:
     token = os.environ["TOKEN"]
     file = open(".env", "w")
-    file.write("token")
+    file.write("TOKEN=" + token)
 except Exception:
     print("token does not exist or other error")
     print("manually put your token in .env")
