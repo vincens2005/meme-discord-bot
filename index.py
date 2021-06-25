@@ -10,17 +10,35 @@ from dotenv import dotenv_values
 
 env = dotenv_values(".env")
 
-filename = "kansas.txt"
 
-file = open(filename)
-text = file.read()
+def create_model():
+    filename_1 = "kansas.txt"
 
-model = markovify.Text(text, state_size=1)
+    file_1 = open(filename_1)
+    text_1 = file_1.read()
+
+    model_1 = markovify.Text(text_1, state_size=1)
+
+    file_2 = open("bible.txt")
+    text_2 = file_2.read()
+    model_2 = markovify.Text(text_2, state_size=1)
+
+    model = markovify.combine([model_1, model_2], [0.5, 1.2])
+    return model
+
+
+model = create_model()
 
 
 def make_meme():
     top_text = model.make_short_sentence(50)
     bottom_text = model.make_short_sentence(50)
+
+    if top_text is None:
+        top_text = ""
+    if bottom_text is None:
+        bottom_text = ""
+
     print("top text: ", top_text)
     print("bottom text: ", bottom_text)
     reactions_dir = "./reactions/"
