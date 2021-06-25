@@ -1,2 +1,2 @@
-worker: index.py
-release: setup.py
+worker: ./index.py
+release: ./setup.py
