@@ -1,7 +1,7 @@
 #!/bin/python3
 import urllib.request
 import subprocess
-
+import os
 
 print("installing dependencies. running as root reccomended")
 
@@ -36,5 +36,14 @@ for download in downloads:
     file.write(data)
 print("text downloaded")
 
+print("checking if token env var exists...")
+
+try:
+    token = os.environ["TOKEN"]
+    file = open(".env", "w")
+    file.write("token")
+except Exception:
+    print("token does not exist or other error")
+    print("manually put your token in .env")
+
 print("setup.py is done.")
-print("make sure to put your bot token in .env")
