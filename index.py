@@ -12,6 +12,7 @@ env = dotenv_values(".env")
 
 
 def create_model():
+    print("generating model...")
     filename_1 = "kansas.txt"
 
     file_1 = open(filename_1)
@@ -22,16 +23,16 @@ def create_model():
     file_2 = open("shrek.txt")
     text_2 = file_2.read()
     model_2 = markovify.Text(text_2, state_size=1)
-   
+
     file_3 = open("bee_movie.txt")
     text_3 = file_3.read()
     model_3 = markovify.Text(text_3, state_size=1)
-    
+
     file_4 = open("comedy.txt")
     text_4 = file_4.read()
     model_4 = markovify.Text(text_4, state_size=1)
 
-    model = markovify.combine([model_1, model_2, model_3, model_4], [0.1, 2.5, 1.3, 1.3])
+    model = markovify.combine([model_1, model_2, model_3, model_4], [0.4, 2.3, 2.2, 3.6])
     return model
 
 
@@ -64,8 +65,8 @@ def make_meme():
     top_text = re.sub(r'[^\w\s]', '', top_text)
     bottom_text = re.sub(r'[^\w\s]', '', bottom_text)
 
-    char_width, char_height = font.getsize("A")
-    chars_per_line = round(image_width / char_width) + 3
+    char_width, char_height = font.getsize("Y")
+    chars_per_line = round(image_width / char_width)
 
     top_lines = textwrap.wrap(top_text, width=chars_per_line)
     bottom_lines = textwrap.wrap(bottom_text, width=chars_per_line)
