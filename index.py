@@ -19,11 +19,19 @@ def create_model():
 
     model_1 = markovify.Text(text_1, state_size=1)
 
-    file_2 = open("bible.txt")
+    file_2 = open("shrek.txt")
     text_2 = file_2.read()
     model_2 = markovify.Text(text_2, state_size=1)
+   
+    file_3 = open("bee_movie.txt")
+    text_3 = file_3.read()
+    model_3 = markovify.Text(text_3, state_size=1)
+    
+    file_4 = open("comedy.txt")
+    text_4 = file_4.read()
+    model_4 = markovify.Text(text_4, state_size=1)
 
-    model = markovify.combine([model_1, model_2], [0.5, 1.2])
+    model = markovify.combine([model_1, model_2, model_3, model_4], [0.1, 2.5, 1.3, 1.3])
     return model
 
 
