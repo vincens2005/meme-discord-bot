@@ -1,2 +1,2 @@
-worker: ./index.py
-release: ./heroku_garbage.sh && ./setup.py
+worker: .heroku/python/bin/python index.py
+release: ./heroku_garbage.sh && .heroku/python/bin/python setup.py

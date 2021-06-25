@@ -1,3 +1,3 @@
 #!/bin/bash
-unset PYTHONHOME
-unset PYTHONPATH
+export PYTHONHOME=/app/.heroku/python
+export PYTHONPATH=.heroku/python/bin/python
