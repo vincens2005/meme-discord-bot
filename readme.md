@@ -15,11 +15,9 @@ this can be done by changing the function `create_model` in `index.py`. more inf
 
 ## running the bot yourself
 
-# you'll need to download the following files because of copyright: 
-  - [bee movie](https://pastebin.com/raw/e90ZUNtD) > `bee_movie.txt`
-  - [shrek](https://pastebin.com/vmqkry8Z) > `shrek.txt`
-  - [various comedies](https://pasteall.org/i2Y4/raw) > `comedy.txt`
+1. run `setup.py` (preferably with root privlieges (but only if you wanna))
 
-1. make a .env file with your bot token in it
+2. make a .env file with your bot token in it
     `TOKEN=my_bot_token`
-2. run `index.py`
+
+3. run `index.py`
